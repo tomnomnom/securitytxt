@@ -1,21 +1,18 @@
-# This is an example file
-Contact: mail@tomnomnom.com
-Contact: https://tomnomnom.com
+# This is an example file that contains 3 comments, 1 of each type of valid
+# contact and 1 invalid, 1 of each type of valid disclosure and 1 invalid,
+# 1 valid encryption and 1 invalid, 1 valid acknowledgement and 1 invalid
+Contact: mail@example.com
+Contact: https://example.com/security
+Contact: +44 5555 555 555
+Contact: Invalid
 
-# This is another comment
 Disclosure: Full
+disclosure: partial
+DISCLOSURE: NONE
+Disclosure: Invalid
 
-# This field has different casing
-acknowledgement: https://tomnomnom.uk/hof
-ENCRYPTION: https://tomnomnom.uk/pgpkey
+Encryption: https://example.com/pgpkey.txt
+Encryption: Invalid
 
-Disclosure: foo 
-Disclosure: full
-
-Encryption: not a URL 
-Acknowledgement: not a URL 
-
-Contact: +44 7555 555 555 
-Contact: +44-7555-555-555
-
-Contact: +44-INVALID-NUMBER
+Acknowledgement: https://example.com/hof
+Acknowledgement: Invalid

@@ -11,8 +11,11 @@ func TestParse(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 
-	f := &File{}
-	f.parse(r)
+	f, err := FromReader(r)
+
+	if err == nil {
+		t.Logf("want non-nil error; have nil")
+	}
 
 	if len(f.Comments()) != 3 {
 		t.Logf("Comments: %#v", f.Comments())
@@ -24,14 +27,14 @@ func TestParse(t *testing.T) {
 		t.Errorf("want 4 errors; have %d", len(f.Errors()))
 	}
 
-	if len(f.Contact()) != 4 {
+	if len(f.Contact()) != 3 {
 		t.Logf("Contact: %#v", f.Contact())
 		t.Errorf("want 3 contacts; have %d", len(f.Contact()))
 	}
 
-	if len(f.Disclosure()) != 2 {
+	if len(f.Disclosure()) != 3 {
 		t.Logf("Disclosure: %#v", f.Disclosure())
-		t.Errorf("want 2 disclosures; have %d", len(f.Disclosure()))
+		t.Errorf("want 3 disclosures; have %d", len(f.Disclosure()))
 	}
 
 	if len(f.Encryption()) != 1 {

@@ -18,12 +18,16 @@ func validDisclosure(d string) bool {
 	return d == "full" || d == "partial" || d == "none"
 }
 
-func validContact(c string) bool {
-	_, err := mail.ParseAddress(c)
-	validEmail := err != nil
+func validEmail(e string) bool {
+	_, err := mail.ParseAddress(e)
+	return err == nil
+}
 
+func validPhone(p string) bool {
 	re := regexp.MustCompile("^\\+[0-9\\(\\) -]+$")
-	validPhone := re.MatchString(c)
+	return re.MatchString(p)
+}
 
-	return validEmail || validURI(c) || validPhone
+func validContact(c string) bool {
+	return validEmail(c) || validURI(c) || validPhone(c)
 }
