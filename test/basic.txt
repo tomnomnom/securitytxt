@@ -1,0 +1,21 @@
+# This is an example file
+Contact: mail@tomnomnom.com
+Contact: https://tomnomnom.com
+
+# This is another comment
+Disclosure: Full
+
+# This field has different casing
+acknowledgement: https://tomnomnom.uk/hof
+ENCRYPTION: https://tomnomnom.uk/pgpkey
+
+Disclosure: foo 
+Disclosure: full
+
+Encryption: not a URL 
+Acknowledgement: not a URL 
+
+Contact: +44 7555 555 555 
+Contact: +44-7555-555-555
+
+Contact: +44-INVALID-NUMBER
