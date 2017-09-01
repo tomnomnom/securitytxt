@@ -10,19 +10,19 @@ type File struct {
 	errors   []error
 	comments []string
 
-	fields []*Field
+	fields []Field
 }
 
-func (f *File) addField(nf *Field) {
+func (f *File) addField(nf Field) {
 	f.fields = append(f.fields, nf)
 }
 
-func (f File) Fields(filter string) []*Field {
+func (f File) Fields(filter string) []Field {
 	if filter == "" {
 		return f.fields
 	}
 
-	out := make([]*Field, 0)
+	out := make([]Field, 0)
 	for _, field := range f.fields {
 		if strings.ToLower(field.option) == filter {
 			out = append(out, field)
@@ -40,13 +40,13 @@ func FromReader(r io.Reader) (*File, error) {
 }
 
 // Contact returns a slice of contact values from the File
-func (f File) Contact() []*Field {
+func (f File) Contact() []Field {
 	return f.Fields(contactField)
 }
 
 // PhoneContact returns any contact values that are valid phone numbers
-func (f File) PhoneContact() []*Field {
-	out := make([]*Field, 0)
+func (f File) PhoneContact() []Field {
+	out := make([]Field, 0)
 	for _, c := range f.Contact() {
 		if validPhone(c.String()) {
 			out = append(out, c)
@@ -57,8 +57,8 @@ func (f File) PhoneContact() []*Field {
 }
 
 // URIContact returns any contact values that are valid URIs
-func (f File) URIContact() []*Field {
-	out := make([]*Field, 0)
+func (f File) URIContact() []Field {
+	out := make([]Field, 0)
 	for _, c := range f.Contact() {
 		if validURI(c.String()) {
 			out = append(out, c)
@@ -69,8 +69,8 @@ func (f File) URIContact() []*Field {
 }
 
 // EmailContact returns any contact values that are valid email addresses
-func (f File) EmailContact() []*Field {
-	out := make([]*Field, 0)
+func (f File) EmailContact() []Field {
+	out := make([]Field, 0)
 	for _, c := range f.Contact() {
 		if validEmail(c.String()) {
 			out = append(out, c)
@@ -86,7 +86,7 @@ func (f File) HasEncryption() bool {
 }
 
 // Encryption returns a slice of encryption URIs from the File
-func (f File) Encryption() []*Field {
+func (f File) Encryption() []Field {
 	return f.Fields(encryptionField)
 }
 
@@ -129,7 +129,7 @@ func (f File) HasNoneDisclosure() bool {
 }
 
 // Disclosure returns a slice of disclosure URIs from the File
-func (f File) Disclosure() []*Field {
+func (f File) Disclosure() []Field {
 	return f.Fields(disclosureField)
 }
 
@@ -139,7 +139,7 @@ func (f File) HasAcknowledgement() bool {
 }
 
 // Acknowledgement returns a slice of acknowledgement values from the File
-func (f File) Acknowledgement() []*Field {
+func (f File) Acknowledgement() []Field {
 	return f.Fields(acknowledgementField)
 }
 

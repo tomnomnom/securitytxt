@@ -48,15 +48,13 @@ func parse(r io.Reader) (*File, error) {
 		option := strings.ToLower(parts[0])
 		value := strings.TrimSpace(parts[1])
 
-		field, err := newField(option, value)
+		field, err := newField(option, value, commentBuffer)
+		commentBuffer = commentBuffer[:0]
+
 		if err != nil {
 			f.addError(fmt.Errorf("%s on line %d", err, n))
-			commentBuffer = commentBuffer[:0]
 			continue
 		}
-
-		field.setComments(commentBuffer)
-		commentBuffer = commentBuffer[:0]
 
 		f.addField(field)
 
