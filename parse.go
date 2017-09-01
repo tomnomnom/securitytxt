@@ -18,6 +18,7 @@ func parse(r io.Reader) (*File, error) {
 	f := &File{}
 	sc := bufio.NewScanner(r)
 
+	commentBuffer := make([]string, 0)
 	n := 0
 	for sc.Scan() {
 		n++
@@ -25,58 +26,39 @@ func parse(r io.Reader) (*File, error) {
 		line := strings.TrimSpace(sc.Text())
 
 		if line == "" {
+			// Reset the comment buffer because the comments
+			// we've stored aren't associated with any field
+			commentBuffer = commentBuffer[:0]
 			continue
 		}
 
 		if line[0] == '#' {
 			f.addComment(line)
+			commentBuffer = append(commentBuffer, line)
 			continue
 		}
 
 		parts := strings.SplitN(line, ":", 2)
 		if len(parts) != 2 {
 			f.addError(fmt.Errorf("invalid input on line %d: %s", n, line))
+			commentBuffer = commentBuffer[:0]
 			continue
 		}
 
 		option := strings.ToLower(parts[0])
 		value := strings.TrimSpace(parts[1])
 
-		switch option {
-
-		case contactField:
-			if !validContact(value) {
-				f.addError(fmt.Errorf("invalid value '%s' for option '%s' on line %d", value, option, n))
-				continue
-			}
-			f.addContact(value)
-
-		case encryptionField:
-			if !validURI(value) {
-				f.addError(fmt.Errorf("invalid value '%s' for option '%s' on line %d", value, option, n))
-				continue
-			}
-			f.addEncryption(value)
-
-		case disclosureField:
-			if !validDisclosure(value) {
-				f.addError(fmt.Errorf(
-					"invalid value '%s' for option '%s' on line %d, should be one of [full, partial, none]", value, option, n,
-				))
-				continue
-			}
-			f.addDisclosure(value)
-
-		case acknowledgementField:
-			if !validURI(value) {
-				f.addError(fmt.Errorf("invalid value '%s' for option '%s' on line %d", value, option, n))
-				continue
-			}
-			f.addAcknowledgement(value)
-
-		default:
-			f.addError(fmt.Errorf("invalid option '%s' on line %d", option, n))
+		field, err := newField(option, value)
+		if err != nil {
+			f.addError(fmt.Errorf("%s on line %d", err, n))
+			commentBuffer = commentBuffer[:0]
+			continue
 		}
+
+		field.setComments(commentBuffer)
+		commentBuffer = commentBuffer[:0]
+
+		f.addField(field)
 
 	}
 
@@ -85,11 +67,11 @@ func parse(r io.Reader) (*File, error) {
 		f.addError(fmt.Errorf("empty file"))
 	}
 
-	if len(f.contact) < 1 {
+	if len(f.Contact()) < 1 {
 		f.addError(fmt.Errorf("does not contain at least one contact field"))
 	}
 
-	if len(f.errors) > 0 {
+	if len(f.Errors()) > 0 {
 		return f, fmt.Errorf("%d errors encountered during parsing", len(f.errors))
 	}
 

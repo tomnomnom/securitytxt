@@ -44,34 +44,30 @@ func main() {
 	}
 	fmt.Println("")
 
-	fmt.Println("Contact:")
-	for _, c := range f.Contact() {
-		fmt.Printf("\t%s\n", c)
-	}
-	fmt.Println("")
+	printFields(f, "contact")
 
-	fmt.Println("Encryption:")
-	for _, e := range f.Encryption() {
-		fmt.Printf("\t%s\n", e)
-	}
-	fmt.Println("")
+	printFields(f, "encryption")
 
-	fmt.Println("Disclosure:")
-	for _, d := range f.Disclosure() {
-		fmt.Printf("\t%s\n", d)
-	}
-	fmt.Println("")
+	printFields(f, "disclosure")
 
-	fmt.Println("Acknowledgement:")
-	for _, a := range f.Acknowledgement() {
-		fmt.Printf("\t%s\n", a)
-	}
+	printFields(f, "acknowledgement")
 
 	if len(f.Errors()) > 0 {
 		os.Exit(3)
 	}
 
 	os.Exit(0)
+}
+
+func printFields(file *securitytxt.File, option string) {
+	fmt.Printf("%s:\n", option)
+	for _, field := range file.Fields(option) {
+		for _, com := range field.Comments() {
+			fmt.Printf("\t%s\n", com)
+		}
+		fmt.Printf("\t%s\n", field)
+	}
+	fmt.Println("")
 }
 
 func getURL(url string) (io.Reader, error) {

@@ -4,10 +4,10 @@ import "testing"
 
 func TestFilters(t *testing.T) {
 	f := &File{}
-	f.addContact("https://example.com")
-	f.addContact("+44 5555 555 555")
-	f.addContact("mail@example.com")
-	f.addDisclosure("full")
+	f.addField(&Field{option: contactField, value: "https://example.com"})
+	f.addField(&Field{option: contactField, value: "+44 5555 555 555"})
+	f.addField(&Field{option: contactField, value: "mail@example.com"})
+	f.addField(&Field{option: disclosureField, value: "full"})
 
 	if len(f.PhoneContact()) != 1 {
 		t.Errorf("want 1 phone contact; have %d", len(f.PhoneContact()))
