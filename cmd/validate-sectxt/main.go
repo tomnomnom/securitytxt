@@ -29,16 +29,16 @@ func main() {
 
 	f, err := securitytxt.FromReader(r)
 	if err != nil {
-		fmt.Printf("Encountered %d errors during parsing\n\n", len(f.Errors()))
+		fmt.Printf("encountered %d errors during parsing\n\n", len(f.Errors()))
 	}
 
-	fmt.Println("Errors:")
+	fmt.Println("errors:")
 	for _, e := range f.Errors() {
 		fmt.Printf("\t%s\n", e)
 	}
 	fmt.Println("")
 
-	fmt.Println("Comments:")
+	fmt.Println("comments:")
 	for _, c := range f.Comments() {
 		fmt.Printf("\t%s\n", c)
 	}
@@ -62,6 +62,9 @@ func main() {
 func printFields(file *securitytxt.File, option string) {
 	fmt.Printf("%s:\n", option)
 	for _, field := range file.Fields(option) {
+		if len(field.Comments()) > 0 {
+			fmt.Println("")
+		}
 		for _, com := range field.Comments() {
 			fmt.Printf("\t%s\n", com)
 		}

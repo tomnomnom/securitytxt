@@ -28,7 +28,7 @@ func parse(r io.Reader) (*File, error) {
 		if line == "" {
 			// Reset the comment buffer because the comments
 			// we've stored aren't associated with any field
-			commentBuffer = commentBuffer[:0]
+			commentBuffer = make([]string, 0)
 			continue
 		}
 
@@ -41,7 +41,7 @@ func parse(r io.Reader) (*File, error) {
 		parts := strings.SplitN(line, ":", 2)
 		if len(parts) != 2 {
 			f.addError(fmt.Errorf("invalid input on line %d: %s", n, line))
-			commentBuffer = commentBuffer[:0]
+			commentBuffer = make([]string, 0)
 			continue
 		}
 
@@ -49,7 +49,7 @@ func parse(r io.Reader) (*File, error) {
 		value := strings.TrimSpace(parts[1])
 
 		field, err := newField(option, value, commentBuffer)
-		commentBuffer = commentBuffer[:0]
+		commentBuffer = make([]string, 0)
 
 		if err != nil {
 			f.addError(fmt.Errorf("%s on line %d", err, n))
