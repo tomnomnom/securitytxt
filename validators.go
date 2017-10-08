@@ -4,18 +4,11 @@ import (
 	"net/mail"
 	"net/url"
 	"regexp"
-	"strings"
 )
 
 func validURI(u string) bool {
 	_, err := url.ParseRequestURI(u)
 	return err == nil
-}
-
-func validDisclosure(d string) bool {
-	d = strings.ToLower(d)
-
-	return d == "full" || d == "partial" || d == "none"
 }
 
 func validEmail(e string) bool {

@@ -34,11 +34,6 @@ func newField(option, value string, comments []string) (Field, error) {
 			return Field{}, fmt.Errorf("invalid value '%s' for option '%s'", value, option)
 		}
 
-	case disclosureField:
-		if !validDisclosure(value) {
-			return Field{}, fmt.Errorf("invalid value '%s' for option '%s'; should be one of [full, partial, none]", value, option)
-		}
-
 	case acknowledgementField:
 		if !validURI(value) {
 			return Field{}, fmt.Errorf("invalid value '%s' for option '%s'", value, option)

@@ -52,22 +52,3 @@ func TestValidPhone(t *testing.T) {
 		}
 	}
 }
-
-func TestValidDisclosure(t *testing.T) {
-	cases := []struct {
-		in   string
-		want bool
-	}{
-		{"full", true},
-		{"PARTIAL", true},
-		{"None", true},
-		{"Invalid", false},
-	}
-
-	for _, c := range cases {
-		have := validDisclosure(c.in)
-		if c.want != have {
-			t.Errorf("want %t for validDisclosure(%s); have %t", c.want, c.in, have)
-		}
-	}
-}

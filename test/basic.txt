@@ -6,11 +6,6 @@ Contact: https://example.com/security
 Contact: +44 5555 555 555
 Contact: Invalid
 
-Disclosure: Full
-disclosure: partial
-DISCLOSURE: NONE
-Disclosure: Invalid
-
 Encryption: https://example.com/pgpkey.txt
 Encryption: Invalid
 

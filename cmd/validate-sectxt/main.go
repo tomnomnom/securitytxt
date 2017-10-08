@@ -48,8 +48,6 @@ func main() {
 
 	printFields(f, "encryption")
 
-	printFields(f, "disclosure")
-
 	printFields(f, "acknowledgement")
 
 	if len(f.Errors()) > 0 {

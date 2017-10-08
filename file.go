@@ -90,49 +90,6 @@ func (f File) Encryption() []Field {
 	return f.Fields(encryptionField)
 }
 
-// HasDisclosure returns true if there is at least one disclosure value
-func (f File) HasDisclosure() bool {
-	return len(f.Disclosure()) > 0
-}
-
-// HasFullDisclosure returns true if there was a disclosure value of 'full'
-func (f File) HasFullDisclosure() bool {
-	for _, d := range f.Disclosure() {
-		if strings.ToLower(d.String()) == "full" {
-			return true
-		}
-	}
-
-	return false
-}
-
-// HasPartialDisclosure returns true if there was a disclosure value of 'partial'
-func (f File) HasPartialDisclosure() bool {
-	for _, d := range f.Disclosure() {
-		if strings.ToLower(d.String()) == "partial" {
-			return true
-		}
-	}
-
-	return false
-}
-
-// HasNoneDisclosure returns true if there was a disclosure value of 'none'
-func (f File) HasNoneDisclosure() bool {
-	for _, d := range f.Disclosure() {
-		if strings.ToLower(d.String()) == "none" {
-			return true
-		}
-	}
-
-	return false
-}
-
-// Disclosure returns a slice of disclosure URIs from the File
-func (f File) Disclosure() []Field {
-	return f.Fields(disclosureField)
-}
-
 // HasAcknowledgement returns true if there is at least one acknowledgement value
 func (f File) HasAcknowledgement() bool {
 	return len(f.Acknowledgement()) > 0

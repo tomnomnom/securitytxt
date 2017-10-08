@@ -10,7 +10,6 @@ import (
 const (
 	contactField         = "contact"
 	encryptionField      = "encryption"
-	disclosureField      = "disclosure"
 	acknowledgementField = "acknowledgement"
 )
 
