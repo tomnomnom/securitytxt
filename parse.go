@@ -8,9 +8,13 @@ import (
 )
 
 const (
-	contactField         = "contact"
-	encryptionField      = "encryption"
 	acknowledgmentsField    = "acknowledgments"
+	canonicalField          = "canonical"
+	contactField            = "contact"
+	encryptionField         = "encryption"
+	hiringField             = "hiring"
+	policyField             = "policy"
+	preferredLanguagesField = "preferred-languages"
 )
 
 func parse(r io.Reader) (*File, error) {

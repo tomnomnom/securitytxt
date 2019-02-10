@@ -90,6 +90,16 @@ func (f File) EmailContact() []Field {
 	return out
 }
 
+// HasCanonical returns true if there is at least one canonical value
+func (f File) HasCanonical() bool {
+	return len(f.Canonical()) > 0
+}
+
+// Canonical returns a slice of canonical values from the File
+func (f File) Canonical() []Field {
+	return f.Fields(canonicalField)
+}
+
 // HasEncryption returns true if there is at least one encryption value
 func (f File) HasEncryption() bool {
 	return len(f.Encryption()) > 0
@@ -98,6 +108,36 @@ func (f File) HasEncryption() bool {
 // Encryption returns a slice of encryption URIs from the File
 func (f File) Encryption() []Field {
 	return f.Fields(encryptionField)
+}
+
+// HasHiring returns true if there is at least one hiring value
+func (f File) HasHiring() bool {
+	return len(f.Hiring()) > 0
+}
+
+// Hiring returns a slice of hiring values from the File
+func (f File) Hiring() []Field {
+	return f.Fields(hiringField)
+}
+
+// HasPolicy returns true if there is at least one policy value
+func (f File) HasPolicy() bool {
+	return len(f.Policy()) > 0
+}
+
+// Policy returns a slice of policy values from the File
+func (f File) Policy() []Field {
+	return f.Fields(policyField)
+}
+
+// HasPreferredLanguages returns true if there is at least one preferredLanguages value
+func (f File) HasPreferredLanguages() bool {
+	return len(f.PreferredLanguages()) > 0
+}
+
+// PreferredLanguages returns a slice of preferredLanguages values from the File
+func (f File) PreferredLanguages() []Field {
+	return f.Fields(preferredLanguagesField)
 }
 
 // addComment adds a comment to the File
