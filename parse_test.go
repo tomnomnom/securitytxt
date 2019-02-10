@@ -37,8 +37,8 @@ func TestParse(t *testing.T) {
 		t.Errorf("want 1 encryption; have %d", len(f.Encryption()))
 	}
 
-	if len(f.Acknowledgement()) != 1 {
-		t.Logf("Acknowledgement: %#v", f.Acknowledgement())
-		t.Errorf("want 1 acknowledgement; have %d", len(f.Acknowledgement()))
+	if len(f.Acknowledgments()) != 1 {
+		t.Logf("Acknowledgments: %#v", f.Acknowledgments())
+		t.Errorf("want 1 acknowledgments; have %d", len(f.Acknowledgments()))
 	}
 }

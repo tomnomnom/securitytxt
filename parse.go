@@ -10,7 +10,7 @@ import (
 const (
 	contactField         = "contact"
 	encryptionField      = "encryption"
-	acknowledgementField = "acknowledgement"
+	acknowledgmentsField    = "acknowledgments"
 )
 
 func parse(r io.Reader) (*File, error) {

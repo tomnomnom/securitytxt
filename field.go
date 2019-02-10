@@ -34,7 +34,7 @@ func newField(option, value string, comments []string) (Field, error) {
 			return Field{}, fmt.Errorf("invalid value '%s' for option '%s'", value, option)
 		}
 
-	case acknowledgementField:
+	case acknowledgmentsField:
 		if !validURI(value) {
 			return Field{}, fmt.Errorf("invalid value '%s' for option '%s'", value, option)
 		}

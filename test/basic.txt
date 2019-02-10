@@ -9,5 +9,5 @@ Contact: Invalid
 Encryption: https://example.com/pgpkey.txt
 Encryption: Invalid
 
-Acknowledgement: https://example.com/hof
-Acknowledgement: Invalid
+Acknowledgements: https://example.com/hof
+Acknowledgements: Invalid

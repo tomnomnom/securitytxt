@@ -48,7 +48,7 @@ func main() {
 
 	printFields(f, "encryption")
 
-	printFields(f, "acknowledgement")
+	printFields(f, "acknowledgments")
 
 	if len(f.Errors()) > 0 {
 		os.Exit(3)

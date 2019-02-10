@@ -39,6 +39,16 @@ func FromReader(r io.Reader) (*File, error) {
 	return parse(r)
 }
 
+// HasAcknowledgments returns true if there is at least one acknowledgments value
+func (f File) HasAcknowledgments() bool {
+	return len(f.Acknowledgments()) > 0
+}
+
+// Acknowledgments returns a slice of acknowledgments values from the File
+func (f File) Acknowledgments() []Field {
+	return f.Fields(acknowledgmentsField)
+}
+
 // Contact returns a slice of contact values from the File
 func (f File) Contact() []Field {
 	return f.Fields(contactField)
@@ -88,16 +98,6 @@ func (f File) HasEncryption() bool {
 // Encryption returns a slice of encryption URIs from the File
 func (f File) Encryption() []Field {
 	return f.Fields(encryptionField)
-}
-
-// HasAcknowledgement returns true if there is at least one acknowledgement value
-func (f File) HasAcknowledgement() bool {
-	return len(f.Acknowledgement()) > 0
-}
-
-// Acknowledgement returns a slice of acknowledgement values from the File
-func (f File) Acknowledgement() []Field {
-	return f.Fields(acknowledgementField)
 }
 
 // addComment adds a comment to the File
