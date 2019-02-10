@@ -17,6 +17,11 @@ func (f *File) addField(nf Field) {
 	f.fields = append(f.fields, nf)
 }
 
+// HasFields returns true if there is at least one field value
+func (f File) HasFields() bool {
+	return len(f.Fields("")) > 0
+}
+
 func (f File) Fields(filter string) []Field {
 	if filter == "" {
 		return f.fields
@@ -47,6 +52,11 @@ func (f File) HasAcknowledgments() bool {
 // Acknowledgments returns a slice of acknowledgments values from the File
 func (f File) Acknowledgments() []Field {
 	return f.Fields(acknowledgmentsField)
+}
+
+// HasContact returns true if there is at least one contact value
+func (f File) HasContact() bool {
+	return len(f.Contact()) > 0
 }
 
 // Contact returns a slice of contact values from the File
