@@ -1,6 +1,11 @@
 # This is an example file that contains 3 comments, 1 of each type of valid
 # contact and 1 invalid, 1 of each type of valid disclosure and 1 invalid,
 # 1 valid encryption and 1 invalid, 1 valid acknowledgement and 1 invalid
+Acknowledgments: https://example.com/hof
+Acknowledgments: Invalid
+
+Canonical: https://example.com/.well-known/security.txt
+
 Contact: mail@example.com
 Contact: https://example.com/security
 Contact: +44 5555 555 555
@@ -9,5 +14,8 @@ Contact: Invalid
 Encryption: https://example.com/pgpkey.txt
 Encryption: Invalid
 
-Acknowledgement: https://example.com/hof
-Acknowledgement: Invalid
+Hiring: https://example.com/jobs
+
+Policy: https://example.com/policy
+
+Preferred-Languages: en, ja

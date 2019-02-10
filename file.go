@@ -17,6 +17,11 @@ func (f *File) addField(nf Field) {
 	f.fields = append(f.fields, nf)
 }
 
+// HasFields returns true if there is at least one field value
+func (f File) HasFields() bool {
+	return len(f.Fields("")) > 0
+}
+
 func (f File) Fields(filter string) []Field {
 	if filter == "" {
 		return f.fields
@@ -37,6 +42,21 @@ func (f File) Fields(filter string) []Field {
 // obtained by calling the returned *File's Errors() method
 func FromReader(r io.Reader) (*File, error) {
 	return parse(r)
+}
+
+// HasAcknowledgments returns true if there is at least one acknowledgments value
+func (f File) HasAcknowledgments() bool {
+	return len(f.Acknowledgments()) > 0
+}
+
+// Acknowledgments returns a slice of acknowledgments values from the File
+func (f File) Acknowledgments() []Field {
+	return f.Fields(acknowledgmentsField)
+}
+
+// HasContact returns true if there is at least one contact value
+func (f File) HasContact() bool {
+	return len(f.Contact()) > 0
 }
 
 // Contact returns a slice of contact values from the File
@@ -80,6 +100,16 @@ func (f File) EmailContact() []Field {
 	return out
 }
 
+// HasCanonical returns true if there is at least one canonical value
+func (f File) HasCanonical() bool {
+	return len(f.Canonical()) > 0
+}
+
+// Canonical returns a slice of canonical values from the File
+func (f File) Canonical() []Field {
+	return f.Fields(canonicalField)
+}
+
 // HasEncryption returns true if there is at least one encryption value
 func (f File) HasEncryption() bool {
 	return len(f.Encryption()) > 0
@@ -90,14 +120,34 @@ func (f File) Encryption() []Field {
 	return f.Fields(encryptionField)
 }
 
-// HasAcknowledgement returns true if there is at least one acknowledgement value
-func (f File) HasAcknowledgement() bool {
-	return len(f.Acknowledgement()) > 0
+// HasHiring returns true if there is at least one hiring value
+func (f File) HasHiring() bool {
+	return len(f.Hiring()) > 0
 }
 
-// Acknowledgement returns a slice of acknowledgement values from the File
-func (f File) Acknowledgement() []Field {
-	return f.Fields(acknowledgementField)
+// Hiring returns a slice of hiring values from the File
+func (f File) Hiring() []Field {
+	return f.Fields(hiringField)
+}
+
+// HasPolicy returns true if there is at least one policy value
+func (f File) HasPolicy() bool {
+	return len(f.Policy()) > 0
+}
+
+// Policy returns a slice of policy values from the File
+func (f File) Policy() []Field {
+	return f.Fields(policyField)
+}
+
+// HasPreferredLanguages returns true if there is at least one preferredLanguages value
+func (f File) HasPreferredLanguages() bool {
+	return len(f.PreferredLanguages()) > 0
+}
+
+// PreferredLanguages returns a slice of preferredLanguages values from the File
+func (f File) PreferredLanguages() []Field {
+	return f.Fields(preferredLanguagesField)
 }
 
 // addComment adds a comment to the File

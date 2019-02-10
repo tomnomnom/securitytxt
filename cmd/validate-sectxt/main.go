@@ -44,11 +44,13 @@ func main() {
 	}
 	fmt.Println("")
 
+	printFields(f, "acknowledgments")
+	printFields(f, "canonical")
 	printFields(f, "contact")
-
 	printFields(f, "encryption")
-
-	printFields(f, "acknowledgement")
+	printFields(f, "hiring")
+	printFields(f, "policy")
+	printFields(f, "preferred-languages")
 
 	if len(f.Errors()) > 0 {
 		os.Exit(3)

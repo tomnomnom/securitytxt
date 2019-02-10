@@ -24,6 +24,16 @@ func newField(option, value string, comments []string) (Field, error) {
 
 	switch option {
 
+	case acknowledgmentsField:
+		if !validURI(value) {
+			return Field{}, fmt.Errorf("invalid value '%s' for option '%s'", value, option)
+		}
+
+	case canonicalField:
+		if !validURI(value) {
+			return Field{}, fmt.Errorf("invalid value '%s' for option '%s'", value, option)
+		}
+
 	case contactField:
 		if !validContact(value) {
 			return Field{}, fmt.Errorf("invalid value '%s' for option '%s'", value, option)
@@ -34,10 +44,18 @@ func newField(option, value string, comments []string) (Field, error) {
 			return Field{}, fmt.Errorf("invalid value '%s' for option '%s'", value, option)
 		}
 
-	case acknowledgementField:
+	case hiringField:
 		if !validURI(value) {
 			return Field{}, fmt.Errorf("invalid value '%s' for option '%s'", value, option)
 		}
+
+	case policyField:
+		if !validURI(value) {
+			return Field{}, fmt.Errorf("invalid value '%s' for option '%s'", value, option)
+		}
+
+	case preferredLanguagesField:
+		// TODO: Validate this properly
 
 	default:
 		return Field{}, fmt.Errorf("invalid option '%s'", option)
